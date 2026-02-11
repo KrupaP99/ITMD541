@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f3f4f6;
+    color: #1f2933;
+    line-height: 1.6;
+}
+
+/* Header */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3rem 5%;
+    background-color: #ffffff;
+    border-bottom: 4px solid #2563eb;
+}
+
+.header-content h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.role {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 0.5rem 0 1rem 0;
+    color: #2563eb;
+}
+
+nav a {
+    text-decoration: none;
+    margin-right: 1.5rem;
+    font-weight: 500;
+    color: #1f2933;
+    transition: 0.3s ease;
+}
+
+nav a:hover {
+    color: #2563eb;
+}
+
+header img {
+    width: 160px;
+    border-radius: 50%;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+/* Main */
+
+main {
+    max-width: 1000px;
+    margin: 3rem auto;
+    padding: 0 5%;
+}
+
+section {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0.5rem;
+}
+
+h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.skills {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.skills li {
+    background-color: #2563eb;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    margin: 0.5rem 0.5rem 0 0;
+    font-size: 0.9rem;
+}
+
+.project-link {
+    display: inline-block;
+    margin-top: 1rem;
+    text-decoration: none;
+    background-color: #2563eb;
+    color: #ffffff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    transition: 0.3s ease;
+}
+
+.project-link:hover {
+    background-color: #1d4ed8;
+}
+
+/* Footer */
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    background-color: #1f2933;
+    color: #ffffff;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    header img {
+        margin-top: 1.5rem;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 0.5rem;
+    }
+}
