@@ -2,56 +2,75 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tip Calculator</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Tip Calculator!</h1>
+<div class="container">
+    <h1>Tip Calculator</h1>
 
-<p>Currency conversion:</p>
-<p>$1 USD = €0.95 EUR</p>
-<p>$1 USD = ₹85 INR</p>
+    <p class="conversion-label">Currency conversion:</p>
+    <p class="conversion-rate">$1 USD = €0.95 EUR for EUROS</p>
+    <p class="conversion-rate">$1 USD = ₹85 INR for Rupees</p>
 
-<form id="tipForm">
+    <form id="tipForm">
 
-    <!-- Bill Total -->
-    <label for="billTotal">Bill Total:</label>
-    <input type="text" id="billTotal">
+        <!-- Bill Total -->
+        <div class="form-group">
+            <label for="billTotal">Bill Total: $</label>
+            <input type="text" id="billTotal" placeholder="Enter amount">
+            <p id="error"></p>
+        </div>
 
-    <!-- Total with Tax -->
-    <label for="totalWithTax">Total Bill with Tax (11%):</label>
-    <input type="text" id="totalWithTax" disabled>
+        <!-- Tax Exempt (541 requirement) -->
+        <div class="form-group checkbox-group">
+            <label class="checkbox-label">
+                <input type="checkbox" id="taxExempt"> Tax Exempt
+            </label>
+        </div>
 
-    <!-- Currency -->
-    <label for="currency">Select Currency:</label>
-    <select id="currency">
-        <option value="usd">US Dollars ($)</option>
-        <option value="eur">Euros (€)</option>
-        <option value="inr">Rupees (₹)</option>
-    </select>
+        <!-- Total with Tax -->
+        <div class="form-group">
+            <label for="totalWithTax">Total Bill with Tax (11%):</label>
+            <input type="text" id="totalWithTax" disabled placeholder="0.00">
+        </div>
 
-    <!-- Tip Slider -->
-    <label for="tipRange">Tip (%):</label>
-    <input type="range" id="tipRange" min="0" max="100" value="0">
-    <input type="text" id="tipPercent" disabled>
+        <!-- Currency -->
+        <div class="form-group">
+            <label for="currency">Select Currency:</label>
+            <select id="currency">
+                <option value="usd">US Dollars ($)</option>
+                <option value="eur">Euros (€)</option>
+                <option value="inr">Rupees (₹)</option>
+            </select>
+        </div>
 
-    <!-- Tip Amount -->
-    <label for="tipAmount">Converted Tip Amount:</label>
-    <input type="text" id="tipAmount" disabled>
+        <!-- Tip Slider -->
+        <div class="form-group">
+            <label for="tipRange">Tip:</label>
+            <div class="slider-row">
+                <input type="range" id="tipRange" min="0" max="100" value="0">
+                <label for="tipPercent" class="sr-only">Tip Percentage Display</label>
+                <input type="text" id="tipPercent" disabled placeholder="0%">
+            </div>
+        </div>
 
-    <!-- Final Total -->
-    <label for="finalTotal">Converted Total Bill with Tip and Tax:</label>
-    <input type="text" id="finalTotal" disabled>
+        <!-- Converted Tip Amount -->
+        <div class="form-group">
+            <label for="tipAmount">Converted Tip Amount:</label>
+            <input type="text" id="tipAmount" disabled placeholder="0.00">
+        </div>
 
-    <!-- 541 Requirement -->
-    <label>
-        <input type="checkbox" id="taxExempt"> Tax Exempt
-    </label>
+        <!-- Final Total -->
+        <div class="form-group">
+            <label for="finalTotal">Converted Total Bill with Tip and Tax:</label>
+            <input type="text" id="finalTotal" disabled placeholder="0.00">
+        </div>
 
-    <p id="error"></p>
-
-</form>
+    </form>
+</div>
 
 <script src="script.js"></script>
 </body>
