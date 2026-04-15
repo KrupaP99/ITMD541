@@ -1,4 +1,5 @@
 const form = document.getElementById("tipForm");
+const tipRange = document.getElementById("tipRange");
 
 form.addEventListener("input", calculate);
 
@@ -26,17 +27,18 @@ function calculate() {
         return;
     } else {
         error.textContent = "";
+        tipRange.disabled = false; // enable slider when valid input is entered
     }
 
     // Reset if bill = 0 (Part B)
     if (bill === 0) {
         resetFields();
+        tipRange.disabled = true;
         return;
     }
 
     // Show tip % in the display box next to slider
     document.getElementById("tipPercent").value = tipPercent + "%";
-    form.addEventListener("input", calculate);
 
     // Tip amount (in USD before conversion)
     let tipAmount = bill * (tipPercent / 100);
@@ -67,8 +69,11 @@ function calculate() {
 
 // Reset all output fields
 function resetFields() {
-    document.getElementById("tipPercent").value = "";
+    document.getElementById("tipPercent").value = "0%";
     document.getElementById("tipAmount").value = "";
     document.getElementById("totalWithTax").value = "";
     document.getElementById("finalTotal").value = "";
+
+    tipRange.value = 0;       // reset slider
+    tipRange.disabled = true; // disable slider
 }
