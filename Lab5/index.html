@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tip Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Tip Calculator</h1>
+
+<p>Currency conversion:</p>
+<p>$1 USD = €0.95 EUR</p>
+<p>$1 USD = ₹85 INR</p>
+
+<form id="tipForm">
+
+    <!-- Bill Total -->
+    <label for="billTotal">Bill Total:</label>
+    <input type="text" id="billTotal">
+
+    <!-- Total with Tax -->
+    <label for="totalWithTax">Total Bill with Tax (11%):</label>
+    <input type="text" id="totalWithTax" disabled>
+
+    <!-- Currency -->
+    <label for="currency">Select Currency:</label>
+    <select id="currency">
+        <option value="usd">US Dollars ($)</option>
+        <option value="eur">Euros (€)</option>
+        <option value="inr">Rupees (₹)</option>
+    </select>
+
+    <!-- Tip Slider -->
+    <label for="tipRange">Tip (%):</label>
+    <input type="range" id="tipRange" min="0" max="100" value="0">
+    <input type="text" id="tipPercent" disabled>
+
+    <!-- Tip Amount -->
+    <label for="tipAmount">Converted Tip Amount:</label>
+    <input type="text" id="tipAmount" disabled>
+
+    <!-- Final Total -->
+    <label for="finalTotal">Converted Total Bill with Tip and Tax:</label>
+    <input type="text" id="finalTotal" disabled>
+
+    <!-- 541 Requirement -->
+    <label>
+        <input type="checkbox" id="taxExempt"> Tax Exempt
+    </label>
+
+    <p id="error"></p>
+
+</form>
+
+<script src="script.js"></script>
+</body>
+</html>
