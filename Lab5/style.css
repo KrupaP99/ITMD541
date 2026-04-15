@@ -1,0 +1,33 @@
+body {
+    font-family: Arial;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+}
+
+input, select {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+}
+
+input:disabled {
+    background-color: #ddd;
+}
+
+#error {
+    color: red;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+    form {
+        width: 100%;
+    }
+}
