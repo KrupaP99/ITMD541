@@ -36,6 +36,7 @@ function calculate() {
 
     // Show tip % in the display box next to slider
     document.getElementById("tipPercent").value = tipPercent + "%";
+    form.addEventListener("input", calculate);
 
     // Tip amount (in USD before conversion)
     let tipAmount = bill * (tipPercent / 100);
