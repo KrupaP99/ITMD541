@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solar Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-orb orb-left"></div>
+    <div class="header-orb orb-right"></div>
+    <div class="header-content">
+      <div class="sun-icon">☀</div>
+      <h1>Solar Dashboard</h1>
+      <p class="tagline">Sunrise &amp; Sunset Intelligence</p>
+    </div>
+  </header>
+
+  <!-- CONTROLS -->
+  <main class="container">
+    <section class="controls-card" aria-label="Location Controls">
+      <div class="controls-inner">
+
+        <!-- Select List -->
+        <div class="control-group">
+          <label for="city-select">Choose a City</label>
+          <div class="select-wrapper">
+            <select id="city-select">
+              <option value="">— Select a city —</option>
+              <option value="41.8781,-87.6298">Chicago, IL, USA</option>
+              <option value="40.7128,-74.0060">New York City, NY, USA</option>
+              <option value="34.0522,-118.2437">Los Angeles, CA, USA</option>
+              <option value="51.5074,-0.1278">London, UK</option>
+              <option value="48.8566,2.3522">Paris, France</option>
+              <option value="35.6762,139.6503">Tokyo, Japan</option>
+              <option value="-33.8688,151.2093">Sydney, Australia</option>
+              <option value="19.0760,72.8777">Mumbai, India</option>
+              <option value="-23.5505,-46.6333">São Paulo, Brazil</option>
+              <option value="55.7558,37.6173">Moscow, Russia</option>
+              <option value="1.3521,103.8198">Singapore</option>
+              <option value="25.2048,55.2708">Dubai, UAE</option>
+            </select>
+            <span class="select-arrow">▾</span>
+          </div>
+          <button id="btn-city" class="btn btn-primary">
+            <span class="btn-icon">🔍</span> Get Data
+          </button>
+        </div>
+
+        <div class="divider-or"><span>or</span></div>
+
+        <!-- Geolocation (541 requirement) -->
+        <div class="control-group control-group--geo">
+          <label>Use Your Location</label>
+          <button id="btn-geo" class="btn btn-secondary">
+            <span class="btn-icon">📍</span> Use Current Location
+          </button>
+          <p class="geo-note">Requires browser permission</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Error Banner -->
+    <div id="error-banner" class="error-banner hidden" role="alert">
+      <span class="error-icon">⚠</span>
+      <span id="error-message">An error occurred.</span>
+      <button id="error-close" class="error-close" aria-label="Dismiss error">✕</button>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loading" class="loading hidden" aria-live="polite" aria-label="Loading data">
+      <div class="spinner"></div>
+      <p>Fetching solar data…</p>
+    </div>
+
+    <!-- Location Label -->
+    <div id="location-label" class="location-label hidden">
+      <span class="pin">📌</span>
+      <span id="location-name-text"></span>
+    </div>
+
+    <!-- DATA CARDS (Today + Tomorrow) -->
+    <div class="days-grid" id="days-grid">
+
+      <!-- TODAY -->
+      <article class="day-card" id="card-today" aria-label="Today's solar data">
+        <div class="day-card__header">
+          <h2>Today</h2>
+          <span class="day-date" id="today-date">—</span>
+        </div>
+        <div class="day-card__body">
+          <div class="stat-row">
+            <div class="stat" id="today-sunrise">
+              <div class="stat__icon">🌅</div>
+              <div class="stat__label">Sunrise</div>
+              <div class="stat__value placeholder">—</div>
+            </div>
+            <div class="stat" id="today-sunset">
+              <div class="stat__icon">🌇</div>
+              <div class="stat__label">Sunset</div>
+              <div class="stat__value placeholder">—</div>
+            </div>
+          </div>
+          <div class="stat-row">
+            <div class="stat" id="today-dawn">
+              <div class="stat__icon">🌤</div>
+              <div class="stat__label">Dawn</div>
+              <div class="stat__value placeholder">—</div>
+            </div>
+            <div class="stat" id="today-dusk">
+              <div class="stat__icon">🌆</div>
+              <div class="stat__label">Dusk</div>
+              <div class="stat__value placeholder">—</div>
+            </div>
+          </div>
+          <div class="stat-row stat-row--trio">
+            <div class="stat" id="today-solar-noon">
+              <div class="stat__icon">☀️</div>
+              <div class="stat__label">Solar Noon</div>
+              <div class="stat__value placeholder">—</div>
+            </div>
+            <div class="stat" id="today-day-length">
+              <div class="stat__icon">⏱</div>
+              <div class="stat__label">Day Length</div>
+              <div class="stat__value placeholder">—</div>
+            </div>
+            <div class="stat" id="today-timezone">
+              <div class="stat__icon">🌐</div>
+              <div class="stat__label">Time Zone</div>
+              <div class="stat__value placeholder">—</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- TOMORROW -->
+      <article class="day-card day-card--tomorrow" id="card-tomorrow" aria-label="Tomorrow's solar data">
+        <div class="day-card__header">
+          <h2>Tomorrow</h2>
+          <span class="day-date" id="tomorrow-date">—</span>
+        </div>
+        <div class="day-card__body">
+          <div class="stat-row">
+            <div class="stat" id="tomorrow-sunrise">
+              <div class="stat__icon">🌅</div>
+              <div class="stat__label">Sunrise</div>
+              <div class="stat__value placeholder">—</div>
+            </div>
+            <div class="stat" id="tomorrow-sunset">
+              <div class="stat__icon">🌇</div>
+              <div class="stat__label">Sunset</div>
+              <div class="stat__value placeholder">—</div>
+            </div>
+          </div>
+          <div class="stat-row">
+            <div class="stat" id="tomorrow-dawn">
+              <div class="stat__icon">🌤</div>
+              <div class="stat__label">Dawn</div>
+              <div class="stat__value placeholder">—</div>
+            </div>
+            <div class="stat" id="tomorrow-dusk">
+              <div class="stat__icon">🌆</div>
+              <div class="stat__label">Dusk</div>
+              <div class="stat__value placeholder">—</div>
+            </div>
+          </div>
+          <div class="stat-row stat-row--trio">
+            <div class="stat" id="tomorrow-solar-noon">
+              <div class="stat__icon">☀️</div>
+              <div class="stat__label">Solar Noon</div>
+              <div class="stat__value placeholder">—</div>
+            </div>
+            <div class="stat" id="tomorrow-day-length">
+              <div class="stat__icon">⏱</div>
+              <div class="stat__label">Day Length</div>
+              <div class="stat__value placeholder">—</div>
+            </div>
+            <div class="stat" id="tomorrow-timezone">
+              <div class="stat__icon">🌐</div>
+              <div class="stat__label">Time Zone</div>
+              <div class="stat__value placeholder">—</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /days-grid -->
+
+    <!-- API Credit (required by rubric) -->
+    <footer class="api-credit">
+      Solar data provided by <a href="https://sunrisesunset.io/" target="_blank" rel="noopener noreferrer">SunriseSunset.io API</a>
+    </footer>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
